@@ -131,7 +131,9 @@ public class Login {
 		String respText = null;
 		try {
 			respText = EntityUtils.toString(resp.getEntity());
-		} catch (ParseException | IOException e) {
+		} catch (ParseException e) {
+			throw new UnexpectedResultException(e);
+		} catch (IOException e){
 			throw new UnexpectedResultException(e);
 		}
 		Element root = DocumentHelper.parseText(respText).getRootElement();
@@ -144,7 +146,7 @@ public class Login {
 		
 		// 2.
 		String url = String.format("%s/webwxinit?&r=%d", Config.BASE_URL, System.currentTimeMillis());
-		Map<String, Map<String, String>> dataMap = new HashMap<>();
+		Map<String, Map<String, String>> dataMap = new HashMap<String, Map<String, String>>();
 		dataMap.put("BaseRequest", wechat.getSession().getBaseRequest());
 		String data = JSON.toJSONString(dataMap);
 		String rs = wechat.getHttpClient().postJson(url, data);
@@ -162,7 +164,7 @@ public class Login {
 		// 3.
 		url = String.format("%s/webwxstatusnotify?lang=zh_CN&pass_ticket=%s",
 				wechat.getSession().getBaseUrl(), wechat.getSession().getPassTicket());
-		Map<String, Object> dataMap2 = new HashMap<>();
+		Map<String, Object> dataMap2 = new HashMap<String, Object>();
 		dataMap2.put("BaseRequest", wechat.getSession().getBaseRequest());
 		dataMap2.put("Code", 3);
 		dataMap2.put("FromUserName", wechat.getSession().getUserName());

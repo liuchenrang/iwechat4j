@@ -51,7 +51,7 @@ public class Session implements Serializable {
 	}
 	
 	public Map<String, String> getBaseRequest() {
-		Map<String, String> map = new HashMap<>();
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("Skey", getAttr("skey"));
 		map.put("Sid", getAttr("wxsid"));
 		map.put("Uin", getAttr("wxuin"));

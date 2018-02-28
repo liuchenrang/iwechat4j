@@ -23,7 +23,7 @@ public class Contacts {
 	private static final Log LOG = LogFactory.getLog(Contacts.class);
 	
 	private Wechat wechat;
-	private Map<String, Member> members = new HashMap<>();
+	private Map<String, Member> members = new HashMap<String, Member>();
 	
 	public Contacts(Wechat wechat) {
 		this.wechat = wechat;
@@ -50,15 +50,15 @@ public class Contacts {
 		}
 		
 		// 加载群组成员
-		Set<Map<String, String>> groups = new HashSet<>();
+		Set<Map<String, String>> groups = new HashSet<Map<String, String>>();
 		for (Member group : getGroupMembers()) {
-			Map<String, String> map = new HashMap<>(2);
+			Map<String, String> map = new HashMap<String, String>(2);
 			map.put("UserName", group.getUserName());
 			map.put("EncryChatRoomId", group.getRaw().getString("EncryChatRoomId"));
 			groups.add(map);
 		}
 		
-		Map<String, Object> dataMap = new HashMap<>();
+		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("BaseRequest", wechat.getSession().getBaseRequest());
 		dataMap.put("Count", groups.size());
 		dataMap.put("List", groups);
@@ -72,7 +72,7 @@ public class Contacts {
 			JSONObject jo = (JSONObject) o;
 			String groupName = jo.getString("UserName");
 			JSONArray MemberList = jo.getJSONArray("MemberList");
-			Set<String> groupMembers = new HashSet<>();
+			Set<String> groupMembers = new HashSet<String>();
 			for (Object o2 : MemberList) {
 				JSONObject jo2 = (JSONObject) o2;
 				groupMembers.add(jo2.getString("UserName"));
@@ -100,7 +100,7 @@ public class Contacts {
 	 * @return
 	 */
 	public Member[] getMemberByNick(String nickName) {
-		Set<Member> set = new HashSet<>();
+		Set<Member> set = new HashSet<Member>();
 		for (Member member : members.values()) {
 			if (member.getNickName().equalsIgnoreCase(nickName)) {
 				set.add(member);
@@ -143,7 +143,7 @@ public class Contacts {
 	 * @return
 	 */
 	private Set<Member> getMembersByType(int memberType) {
-		Set<Member> set = new HashSet<>();
+		Set<Member> set = new HashSet<Member>();
 		for (Member member : members.values()) {
 			if (member.getType() == memberType) {
 				set.add(member);

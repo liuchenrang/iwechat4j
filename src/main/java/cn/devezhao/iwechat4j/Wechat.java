@@ -161,7 +161,7 @@ public class Wechat extends Observable implements Api {
 	public boolean addFriend(String useruin, String verifyContent) {
 		String url = String.format("%s/webwxverifyuser?r=%d&pass_ticket=%s",
 				getSession().getBaseUrl(), System.currentTimeMillis(), getSession().getPassTicket());
-		Map<String, Object> dataMap = new HashMap<>();
+		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("BaseRequest", getSession().getBaseRequest());
 		dataMap.put("Opcode", 2);
 		dataMap.put("VerifyContent", verifyContent);
@@ -169,8 +169,8 @@ public class Wechat extends Observable implements Api {
 		dataMap.put("SceneListCount", 1);
 		dataMap.put("skey", getSession().getSkey());
 		
-		List<Map<String, String>> users = new ArrayList<>();
-		Map<String, String> user = new HashMap<>();
+		List<Map<String, String>> users = new ArrayList<Map<String, String>>();
+		Map<String, String> user = new HashMap<String, String>();
 		user.put("Value", useruin);
 		user.put("VerifyUserTicket", "");
 		users.add(user);
@@ -224,7 +224,7 @@ public class Wechat extends Observable implements Api {
 				getSession().getBaseUrl(), getSession().getAttr("wxsid"), 
 				getSession().getAttr("skey"), getSession().getPassTicket());
 		
-		Map<String, Object> params = new HashMap<>();
+		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("BaseRequest", getSession().getBaseRequest());
 		params.put("SyncKey", getSession().getSyncKeyRaw());
 		params.put("rr", -new Date().getTime() / 1000);

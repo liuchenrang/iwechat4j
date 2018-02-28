@@ -132,10 +132,10 @@ public class Utils {
 	 * @return
 	 */
 	public static Map<String, Object> buildBaseRequestParams(Wechat wechat) {
-		Map<String, Object> dataMap = new HashMap<>();
+		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("BaseRequest", wechat.getSession().getBaseRequest());
 		dataMap.put("Scene", 0);
-		Map<String, Object> msg = new HashMap<>();
+		Map<String, Object> msg = new HashMap<String, Object>();
 		msg.put("FromUserName", wechat.getSession().getUserName());
 		msg.put("LocalID", System.currentTimeMillis());
 		msg.put("ClientMsgId", System.currentTimeMillis());

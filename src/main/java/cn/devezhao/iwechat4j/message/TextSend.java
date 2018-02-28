@@ -30,11 +30,11 @@ public class TextSend implements Send {
 	@Override
 	public boolean send(Wechat wechat) {
 		String url = String.format("%s/webwxsendmsg", wechat.getSession().getBaseUrl());
-		Map<String, Object> dataMap = new HashMap<>();
+		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("BaseRequest", wechat.getSession().getBaseRequest());
 		dataMap.put("Scene", 0);
 		
-		Map<String, Object> msg = new HashMap<>();
+		Map<String, Object> msg = new HashMap<String, Object>();
 		msg.put("Type", MessageType.Text.getNumber());
 		msg.put("Content", content);
 		msg.put("FromUserName", wechat.getSession().getUserName());
